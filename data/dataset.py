@@ -56,7 +56,7 @@ class FaceLandmarksDataset(Dataset):
             sample = self.transform(sample)
 
         return sample
-    
+
 class CropLaneDataset(Dataset):
     def __init__(self, images_filenames, images_directory, masks_directory, transform=None):
         self.images_filenames = images_filenames
@@ -70,8 +70,8 @@ class CropLaneDataset(Dataset):
     def __getitem__(self, idx):
         image_filename = self.images_filenames[idx]
         image = cv2.imread(os.path.join(self.images_directory, image_filename))
-        print(image_filename)
-        print(image.shape)
+        # print(image_filename)
+        # print(image.shape)
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         mask = cv2.imread(
             os.path.join(self.masks_directory, image_filename), cv2.IMREAD_UNCHANGED,
@@ -82,7 +82,7 @@ class CropLaneDataset(Dataset):
             image = transformed["image"]
             mask = transformed["mask"]
         return image, mask
-    
+
 class CropLaneInferenceDataset(Dataset):
     def __init__(self, images_filenames, images_directory, transform=None):
         self.images_filenames = images_filenames
